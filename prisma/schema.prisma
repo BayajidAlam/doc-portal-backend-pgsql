@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// doctors model 
+model Doctor {
+  id              String   @id @default(uuid())
+  fullName        String   @map("full_name")
+  email           String   @unique
+  phontNumber     String   @unique @map("phont_number")
+  role            String   @default("doctor")
+  qualification   String
+  specialization  String
+  password        String
+  isPasswordReset Boolean  @default(false) @map("is_password_reset")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @map("updated_at")
+
+  @@map("doctors")
+}
+
+
+// doctors specialization 
